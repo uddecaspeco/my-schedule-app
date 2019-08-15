@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation';
-import { ScheduleScreen, OccupiedSettings } from '../screens';
+import { ScheduleScreen, OccupiedSettingsScreen, ShiftDetailsScreen } from '../screens';
 import { colors } from "../ui/theme";
 
 export const StackNavigator = createStackNavigator(
@@ -15,6 +15,13 @@ export const StackNavigator = createStackNavigator(
       navigationOptions: () => ({
         headerBackTitle: null,
         headerTintColor: colors.seagullBlue
+      })
+    },
+    SHIFT_DETAILS_SCREEN: {
+      screen: ShiftDetailsScreen,
+      navigationOptions: () => ({
+        headerBackTitle: null,
+        headerTintColor: colors.malibuBlue
       })
     }
   },
