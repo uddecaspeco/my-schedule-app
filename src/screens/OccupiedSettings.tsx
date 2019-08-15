@@ -5,10 +5,10 @@ import { Text } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { colors } from "../ui/theme"
 
-type IOccupiedSettingsProps = NavigationScreenProps;
+type IOccupiedSettingsScreenProps = NavigationScreenProps;
 
-export class OccupiedSettings extends Component<IOccupiedSettingsProps> {
-  constructor(props: IOccupiedSettingsProps) {
+export class OccupiedSettingsScreen extends Component<IOccupiedSettingsScreenProps> {
+  constructor(props: IOccupiedSettingsScreenProps) {
     super(props);
     this.state = {};
   }

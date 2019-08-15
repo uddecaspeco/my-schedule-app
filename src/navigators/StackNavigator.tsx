@@ -11,7 +11,7 @@ export const StackNavigator = createStackNavigator(
       })
     },
     OCCUPIED_SETTINGS_SCREEN: {
-      screen: OccupiedSettings,
+      screen: OccupiedSettingsScreen,
       navigationOptions: () => ({
         headerBackTitle: null,
         headerTintColor: colors.seagullBlue
