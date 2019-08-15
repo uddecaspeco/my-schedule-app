@@ -4,8 +4,8 @@ import { createBottomTabNavigator } from "react-navigation";
 import { Icon } from "react-native-elements";
 
 import { colors } from "../ui/theme/colors";
-import { StackNavigator } from "./StackNavigator";
 import { SettingsScreen } from "../screens";
+import { StackNavigator } from "./StackNavigator";
 
 const SettingsTabBarIcon = (props) => {
   return <Icon type={"font-awesome"} size={28} name={"cog"} color={props.tintColor} />
@@ -45,9 +45,6 @@ export const AppNavigator = createBottomTabNavigator(
       showLabel: false,
       inactiveTintColor: colors.seagullBlue,
       activeTintColor: colors.ceruleanBlue,
-      labelStyle: {
-        fontSize: 18,
-      },
       style: {
         backgroundColor: colors.white,
         display: "flex",

@@ -22,6 +22,8 @@ export const colors = {
     white: "rgb(255, 255, 255)",
     wildSand: "rgb(245, 245, 245)",
 
+    black: "rgb(9, 9, 9)",
+
 
     // Activity indicating colors:
     seagullBlue: "rgb(138, 211, 234)", // Dusty
