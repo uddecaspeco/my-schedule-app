@@ -5,7 +5,7 @@ import "moment/locale/sv";
 
 import { Component } from "react";
 import { StyleSheet, View } from "react-native";
-import { Text, Header, Icon, Divider, Card, Button } from "react-native-elements";
+import { Text, Header, Icon, Card } from "react-native-elements";
 import { IWorkingShift } from "typings/workingShift";
 import {
   NavigationInjectedProps,
