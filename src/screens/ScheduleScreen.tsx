@@ -24,8 +24,10 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
     this.state = {};
   }
 
-  goToShiftDetailsScreen = () => {
-    this.props.navigation.navigate("SHIFT_DETAILS_SCREEN");
+  goToShiftDetailsScreen = (shift: IWorkingShift) => {
+    return () => {
+      this.props.navigation.navigate("SHIFT_DETAILS_SCREEN", { shift });
+    };
   };
 
   occupiedSettingsIcon = (setting: string) => {
@@ -38,7 +40,7 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
         color = colors.red;
         break;
       default:
-        color = colors.seagullBlue;
+        color = colors.ceruleanBlue;
         break;
     }
 
@@ -49,14 +51,9 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
 
   leftElement = (shift: IWorkingShift) => {
     return (
-      <View style={styles.leftElement}>
-        <Text style={{ fontSize: size.regular }}>
-          {Moment(shift.date).format("ddd")}
-        </Text>
-        <Text style={{ fontSize: size.extraLarge }}>
-          {Moment(shift.date).format("DD")}
-        </Text>
-        {this.occupiedSettingsIcon(shift.occupiedStatus)}
+      <View style={styles.dateWrapper}>
+        <Text>{Moment(shift.date).format("ddd")}</Text>
+        <Text h1>{Moment(shift.date).format("DD")}</Text>
       </View>
     );
   };
@@ -65,35 +62,30 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
     return <Badge value={station} />;
   };
 
-  renderItem = ({ item }) => {
+  renderShifts = ({ item }) => {
     return (
-      <View style={styles.listItemContainer}>
-        <View style={styles.leftElement}>
-          <Text style={{ fontSize: size.regular }}>
-            {Moment(item.date).format("ddd")}
-          </Text>
-          <Text style={{ fontSize: size.extraLarge }}>
-            {Moment(item.date).format("DD")}
-          </Text>
-          {this.occupiedSettingsIcon(item.occupiedStatus)}
-        </View>
+      <View style={styles.listItem}>
+        {this.leftElement(item)}
 
-        <View style={{ flexDirection: "column", flexGrow: 1 }}>
+        <View style={styles.shiftsWrapper}>
           {item.shifts.length < 1 && (
             <ListItem
               key={item.id}
               title={"Inga pass denna dag"}
+              leftElement={this.occupiedSettingsIcon(item.occupiedStatus)}
+              titleStyle={{ color: colors.grey, fontStyle: "italic" }}
               containerStyle={styles.shiftContainer}
             />
           )}
-          {item.shifts.map(shift => {
+          {item.shifts.map((shift: IWorkingShift) => {
             return (
               <TouchableOpacity
                 key={shift.id}
-                onPress={this.goToShiftDetailsScreen}
+                onPress={this.goToShiftDetailsScreen(shift)}
               >
                 <ListItem
                   title={shift.time}
+                  leftElement={this.occupiedSettingsIcon(item.occupiedStatus)}
                   rightElement={this.stationBadge(shift.station)}
                   containerStyle={styles.shiftContainer}
                   chevron
@@ -106,17 +98,17 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
     );
   };
 
-  keyExtractor = (item, index) => index.toString();
+  keyExtractor = (_item: IWorkingShift, index: number) => index.toString();
 
   render() {
     return (
       <SafeAreaView style={styles.screen}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          style={styles.listContainer}
+          style={styles.container}
           keyExtractor={this.keyExtractor}
           data={workingShiftsForWeek}
-          renderItem={this.renderItem}
+          renderItem={this.renderShifts}
         />
       </SafeAreaView>
     );
@@ -125,26 +117,36 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
-    backgroundColor: colors.wildSand
+    backgroundColor: colors.wildSand,
+    flex: 1
   },
-  listContainer: {
-    marginHorizontal: spacing.base
+  container: {
+    paddingHorizontal: spacing.tight
   },
-  listItemContainer: {
+  listItem: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: spacing.tight
+  },
+  dateWrapper: {
+    width: "15%",
     alignItems: "center"
   },
-  shiftContainer: {
-    padding: spacing.base,
-    marginVertical: spacing.extraTight,
-    borderRadius: borderRadius.rounded
+  shiftsWrapper: {
+    flexDirection: "column",
+    flexGrow: 1
   },
-  leftElement: {
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    padding: spacing.base
+  shiftContainer: {
+    borderRadius: borderRadius.rounded,
+    marginVertical: spacing.extraTight,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowRadius: 2,
+    shadowOpacity: 0.08
   }
 });
