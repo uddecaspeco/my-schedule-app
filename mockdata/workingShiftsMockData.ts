@@ -2,11 +2,14 @@ import { IWorkingShift } from "typings/workingShift";
 import { IScheduleDateValues } from "typings/scheduleDateValues";
 
 const baseShift: IWorkingShift = {
-    station: "Bar",
+    station: {
+        name: "Bar",
+        color: "rgb(212, 74, 127)"
+    },
     time: "10:00 - 19:00",
 }
 
-export const workingShiftsForWeek: IScheduleDateValues[] = [
+export const workingShiftsMockData: IScheduleDateValues[] = [
     {   
         id: 0,
         date: "2019-08-12",
@@ -33,7 +36,10 @@ export const workingShiftsForWeek: IScheduleDateValues[] = [
                 ...baseShift,
                 id: 11,
                 time: "07:30 - 10:30",
-                station: "Servis"
+                station: {
+                    name: "Servis",
+                    color: "rgb(5, 156, 120)"
+                }
             },
             {
                 ...baseShift,
@@ -49,7 +55,7 @@ export const workingShiftsForWeek: IScheduleDateValues[] = [
             {
                 ...baseShift,
                 id: 13,
-                comment: "Städa baren"
+                comment: "Städa baren efter passets slut."
             },
         ]
     },
@@ -60,6 +66,10 @@ export const workingShiftsForWeek: IScheduleDateValues[] = [
             {
                 ...baseShift,
                 id: 14,
+                station: {
+                    name: "Kök",
+                    color: "rgb(77, 104, 148)"
+                }
             },
         ]
     },
