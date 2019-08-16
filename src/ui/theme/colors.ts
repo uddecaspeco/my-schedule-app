@@ -26,6 +26,7 @@ export const colors = {
     lowOpacityBlack: "rgba(0, 0, 0, 0.08)",
 
     lightGrey: "rgb(239, 239, 239)",
+    mediumGrey: "rgb(214, 214, 214)",
     grey: "rgb(112, 112, 112)",
 
 

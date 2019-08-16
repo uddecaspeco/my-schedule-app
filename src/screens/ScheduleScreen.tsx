@@ -106,13 +106,14 @@ export class ScheduleScreen extends Component<
     );
   };
 
-  renderCommentIcon = (comment: string) => {
+  renderCommentIcon = () => {
     return (
       <Icon
         type={"font-awesome"}
         name={"comment"}
-        color={colors.ceruleanBlue}
-        size={18}
+        color={colors.mediumGrey}
+        iconStyle={{ marginTop: - spacing.extraTight}}
+        size={22}
       />
     );
   };
