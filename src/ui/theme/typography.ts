@@ -6,8 +6,8 @@ export const weight = {
 }
 
 export const size = {
-    small: 12,
-    regular: 14,
-    large: 16,
-    extraLarge: 18
+    small: 14,
+    regular: 16,
+    large: 18,
+    extraLarge: 22
 }
