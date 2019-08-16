@@ -3,8 +3,18 @@ import Moment from "moment";
 
 import { Component } from "react";
 import { StyleSheet, FlatList, View, TouchableOpacity } from "react-native";
-import { Text, Icon, ListItem, Badge, Header, Card } from "react-native-elements";
+import {
+  Text,
+  Icon,
+  ListItem,
+  Badge,
+  Header,
+  Card,
+  Overlay as Modal,
+  Tooltip
+} from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
+
 import { IWorkingShift } from "typings/workingShift";
 import { IScheduleDateValues } from "typings/scheduleDateValues";
 import { IStation } from "typings/station";
@@ -16,9 +26,16 @@ import "moment/locale/sv";
 
 type IScheduleScreenProps = NavigationScreenProps;
 
+interface IScheduleScreenState {
+  modalIsVisible: boolean;
+}
+
 Moment.locale("sv");
 
-export class ScheduleScreen extends Component<IScheduleScreenProps> {
+export class ScheduleScreen extends Component<
+  IScheduleScreenProps,
+  IScheduleScreenState
+> {
   constructor(props: IScheduleScreenProps) {
     super(props);
     this.state = {
@@ -55,28 +72,41 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
       </TouchableOpacity>
     );
   };
+
   renderOccupiedSettingsIcon = (setting: string) => {
     let color: string;
     let name: string;
+    let svSettingName: string;
     switch (setting) {
       case "free":
         color = colors.green;
         name = "calendar-check-o";
+        svSettingName = 'Du är markerad som "tillgänglig".';
         break;
       case "occupied":
         color = colors.red;
         name = "calendar-times-o";
+        svSettingName = 'Du är markerad som "otillgänglig".';
         break;
       default:
         color = colors.ceruleanBlue;
         name = "calendar-check-o";
+        svSettingName = "Ingen inställning för datumet.";
         break;
     }
 
-    return <Icon type={"font-awesome"} name={name} color={color} size={18} />;
+    return (
+      <Tooltip
+        backgroundColor={colors.seagullBlue}
+        height={60}
+        popover={<Text>{svSettingName}</Text>}
+      >
+        <Icon type={"font-awesome"} name={name} color={color} size={20} />
+      </Tooltip>
+    );
   };
 
-  renderCommentIcon = () => {
+  renderCommentIcon = (comment: string) => {
     return (
       <Icon
         type={"font-awesome"}
@@ -101,7 +131,35 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
     );
   };
 
-  stationBadge = (station: IStation) => {
+  renderWeekToggler = () => {
+    return (
+      <View style={styles.row}>
+        <TouchableOpacity activeOpacity={0.5}>
+          <Icon
+            iconStyle={{ marginTop: spacing.extraTight, marginRight: spacing.loose }}
+            type={"font-awesome"}
+            name={"chevron-left"}
+            color={colors.white}
+            size={24}
+          />
+        </TouchableOpacity>
+        <Text h1 style={{ color: colors.white }}>
+          v. 33
+        </Text>
+        <TouchableOpacity activeOpacity={0.5}>
+          <Icon
+            type={"font-awesome"}
+            name={"chevron-right"}
+            color={colors.white}
+            size={24}
+            iconStyle={{ marginTop: spacing.extraTight, marginLeft: spacing.loose }}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  renderStationBadge = (station: IStation) => {
     return (
       <Badge
         badgeStyle={{ backgroundColor: station.color }}
@@ -121,7 +179,9 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
               <ListItem
                 key={item.id}
                 title={"Inga pass denna dag"}
-                leftElement={this.renderOccupiedSettingsIcon(item.occupiedStatus)}
+                leftElement={this.renderOccupiedSettingsIcon(
+                  item.occupiedStatus
+                )}
                 titleStyle={{ color: colors.grey, fontStyle: "italic" }}
               />
             </Card>
@@ -139,8 +199,10 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
                     leftElement={this.renderOccupiedSettingsIcon(
                       item.occupiedStatus
                     )}
-                    rightIcon={shift.comment && this.renderCommentIcon()}
-                    rightElement={this.stationBadge(shift.station)}
+                    rightIcon={
+                      shift.comment && this.renderCommentIcon(shift.comment)
+                    }
+                    rightElement={this.renderStationBadge(shift.station)}
                     chevron
                   />
                 </Card>
@@ -212,10 +274,6 @@ const styles = StyleSheet.create({
     width: "15%",
     alignItems: "center"
   },
-  shiftsWrapper: {
-    flexDirection: "column",
-    flexGrow: 1
-  },
   headerShadow: {
     shadowColor: colors.black,
     shadowOffset: {
@@ -224,5 +282,12 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 4,
     shadowOpacity: 0.15
+  },
+  shiftsWrapper: {
+    flexDirection: "column",
+    flexGrow: 1
+  },
+  row: {
+    flexDirection: "row",
   }
 });
