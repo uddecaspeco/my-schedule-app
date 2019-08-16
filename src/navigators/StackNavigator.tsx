@@ -13,19 +13,19 @@ export const StackNavigator = createStackNavigator(
     OCCUPIED_SETTINGS_SCREEN: {
       screen: OccupiedSettingsScreen,
       navigationOptions: () => ({
-        headerBackTitle: null,
         headerTintColor: colors.ceruleanBlue
       })
     },
     SHIFT_DETAILS_SCREEN: {
       screen: ShiftDetailsScreen,
       navigationOptions: () => ({
-        headerBackTitle: null,
-        headerTintColor: colors.ceruleanBlue
+        headerTransparent: true,
+        headerTintColor: colors.white
       })
     }
   },
   {
+    headerBackTitleVisible: false,
     initialRouteName: 'SCHEDULE_SCREEN'
   }
 );

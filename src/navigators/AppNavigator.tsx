@@ -48,7 +48,7 @@ export const AppNavigator = createBottomTabNavigator(
       style: {
         backgroundColor: colors.white,
         display: "flex",
-        borderTopColor: "transparent"
+        borderTopColor: "transparent",
       }
     }
   }
