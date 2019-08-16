@@ -7,7 +7,7 @@ export const TabNavigator = createMaterialTopTabNavigator(
     OCCUPIED_SETTINGS_SCREEN: {
       screen: OccupiedSettingsScreen,
       navigationOptions: {
-        title: "Status"
+        title: "Tillgänglighet"
       }
     },
     PROFILE_SETTINGS_SCREEN: {
@@ -31,7 +31,8 @@ export const TabNavigator = createMaterialTopTabNavigator(
         shadowOpacity: 0.15,
       },
       tabStyle: {
-        padding: spacing.loose,
+        paddingHorizontal: spacing.base,
+        paddingVertical: spacing.loose
       },
       labelStyle: {
         marginTop: spacing.loose,
