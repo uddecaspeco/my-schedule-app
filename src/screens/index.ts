@@ -1,4 +1,4 @@
 export { ScheduleScreen } from './ScheduleScreen';
-export { SettingsScreen } from './SettingsScreen';
+export { ProfileSettingsScreen } from './ProfileSettingsScreen';
 export { OccupiedSettingsScreen } from './OccupiedSettings';
 export { ShiftDetailsScreen } from './ShiftDetailsScreen';

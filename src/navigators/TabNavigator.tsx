@@ -1,19 +1,17 @@
 import { createMaterialTopTabNavigator } from "react-navigation";
-import { OccupiedSettingsScreen, SettingsScreen } from "../screens";
+import { OccupiedSettingsScreen, ProfileSettingsScreen } from "../screens";
 import { colors, size, weight, spacing } from "../ui/theme";
 
 export const TabNavigator = createMaterialTopTabNavigator(
   {
     OCCUPIED_SETTINGS_SCREEN: {
       screen: OccupiedSettingsScreen,
-
       navigationOptions: {
         title: "Status"
       }
     },
-    SETTINGS_SCREEN: {
-      screen: SettingsScreen,
-
+    PROFILE_SETTINGS_SCREEN: {
+      screen: ProfileSettingsScreen,
       navigationOptions: {
         title: "Profil"
       }

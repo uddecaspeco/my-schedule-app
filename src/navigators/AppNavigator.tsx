@@ -6,6 +6,7 @@ import { Icon } from "react-native-elements";
 import { colors } from "../ui/theme/colors";
 import { SettingsScreen } from "../screens";
 import { StackNavigator } from "./StackNavigator";
+import { TabNavigator } from "./TabNavigator";
 
 const SettingsTabBarIcon = (props) => {
   return <Icon type={"font-awesome"} size={28} name={"cog"} color={props.tintColor} />
@@ -28,7 +29,7 @@ export const AppNavigator = createBottomTabNavigator(
       }
     },
     SETTINGS_SCREEN: {
-      screen: SettingsScreen,
+      screen: TabNavigator,
       navigationOptions: {
         tabBarAccessibilityLabel: "Settings",
         tabBarIcon: props =>

@@ -5,10 +5,10 @@ import { Text, Avatar, Header, Card, Input } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { colors, spacing } from "../ui/theme";
 
-type ISettingsScreenProps = NavigationScreenProps;
+type IProfileSettingsScreenProps = NavigationScreenProps;
 
-export class SettingsScreen extends Component<ISettingsScreenProps> {
-  constructor(props: ISettingsScreenProps) {
+export class ProfileSettingsScreen extends Component<IProfileSettingsScreenProps> {
+  constructor(props: IProfileSettingsScreenProps) {
     super(props);
     this.state = {};
   }
@@ -16,13 +16,6 @@ export class SettingsScreen extends Component<ISettingsScreenProps> {
   render() {
     return (
       <View style={styles.screen}>
-        <Header
-          centerComponent={
-            <Text h1 style={{ color: colors.white }}>
-              Profilinställningar
-            </Text>
-          }
-        />
         <View style={styles.container}>
           <Avatar
             containerStyle={styles.avatar}
