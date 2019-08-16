@@ -9,6 +9,7 @@ import { IWorkingShift } from "typings/workingShift";
 import { IScheduleDateValues } from "typings/scheduleDateValues";
 import { IStation } from "typings/station";
 import { colors, spacing } from "../ui/theme";
+import { Calendar } from "../ui/framework-components/Calendar";
 import { workingShiftsMockData } from "../../mockdata/workingShiftsMockData";
 
 import "moment/locale/sv";
@@ -20,7 +21,9 @@ Moment.locale("sv");
 export class ScheduleScreen extends Component<IScheduleScreenProps> {
   constructor(props: IScheduleScreenProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      modalIsVisible: false
+    };
   }
 
   goToShiftDetailsScreen = (shift: IWorkingShift) => {
@@ -29,6 +32,29 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
     };
   };
 
+  toggleModal = () => {
+    this.setState({ modalIsVisible: !this.state.modalIsVisible });
+  };
+
+  renderToggleCalendarComponent = () => {
+    return (
+      <TouchableOpacity
+        style={styles.row}
+        onPress={this.toggleModal}
+        activeOpacity={0.5}
+      >
+        <Icon
+          type={"font-awesome"}
+          name={"calendar"}
+          color={colors.white}
+          raised={!this.state.modalIsVisible}
+          reverse
+          size={18}
+          iconStyle={{ color: colors.ceruleanBlue }}
+        />
+      </TouchableOpacity>
+    );
+  };
   renderOccupiedSettingsIcon = (setting: string) => {
     let color: string;
     let name: string;
@@ -134,7 +160,27 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
       <View style={styles.screen}>
         <Header
           containerStyle={styles.headerShadow}
+          centerComponent={this.renderWeekToggler()}
+          leftComponent={this.renderToggleCalendarComponent()}
         />
+        <Modal
+          isVisible={this.state.modalIsVisible}
+          onBackdropPress={this.toggleModal}
+        >
+          <Calendar
+            current={new Date("2019-08-16")}
+            markedDates={{
+              "2019-08-11": { selected: true, marked: true, startingDay: true },
+              "2019-08-12": { selected: true, marked: true },
+              "2019-08-13": { selected: true },
+              "2019-08-14": { selected: true, marked: true },
+              "2019-08-15": { selected: true, marked: true },
+              "2019-08-16": { selected: true, marked: true },
+              "2019-08-17": { selected: true, endingDay: true }
+            }}
+          />
+        </Modal>
+
         <FlatList
           showsVerticalScrollIndicator={false}
           style={styles.listWrapper}
