@@ -26,6 +26,16 @@ export const theme = {
     style: {
       fontSize: size.regular,
       fontWeight: weight.regular
+    },
+    h1Style: {
+      fontSize: size.extraLarge,
+    },
+    h2Style: {
+      fontSize: size.large
+    },
+    h3Style: {
+      fontSize: size.regular,
+      fontWeight: "600",
     }
   }
 } as Theme;
