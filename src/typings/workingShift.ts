@@ -1,4 +1,3 @@
-
 export interface IWorkingShift {
     id?: number;
     time?: string;
@@ -7,5 +6,4 @@ export interface IWorkingShift {
     station?: string;
     comment?: string;
     absence?: string;
-    noShift?: boolean;
 }

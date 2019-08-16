@@ -2,13 +2,23 @@ import React from "react";
 import { Component } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-elements";
-import { NavigationScreenProps } from "react-navigation";
-import { colors } from "../ui/theme"
 
-type IShiftDetailsScreenProps = NavigationScreenProps;
+import { IWorkingShift } from "typings/workingShift";
+import { NavigationInjectedProps, NavigationScreenProp, NavigationState } from "react-navigation";
 
-export class ShiftDetailsScreen extends Component<IShiftDetailsScreenProps> {
-  constructor(props: IShiftDetailsScreenProps) {
+import { colors } from "../ui/theme";
+
+interface IShiftDetailsScreenState extends NavigationState {}
+interface IShiftDetailsScreenProps {
+  shift: IWorkingShift;
+  navigation: NavigationScreenProp<IShiftDetailsScreenState>;
+}
+
+type Props = IShiftDetailsScreenProps & NavigationInjectedProps;
+
+
+export class ShiftDetailsScreen extends Component<Props> {
+  constructor(props: Props) {
     super(props);
     this.state = {};
   }

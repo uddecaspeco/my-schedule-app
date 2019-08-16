@@ -1,11 +1,12 @@
 import { IWorkingShift } from "typings/workingShift";
+import { IScheduleDateValues } from "typings/scheduleDateValues";
 
 const baseShift: IWorkingShift = {
     station: "Bar",
     time: "10:00 - 19:00",
 }
 
-export const workingShiftsForWeek = [
+export const workingShiftsForWeek: IScheduleDateValues[] = [
     {   
         id: 0,
         date: "2019-08-12",
@@ -48,6 +49,7 @@ export const workingShiftsForWeek = [
             {
                 ...baseShift,
                 id: 13,
+                comment: "Städa baren"
             },
         ]
     },

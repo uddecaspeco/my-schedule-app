@@ -15,6 +15,7 @@ import { NavigationScreenProps } from "react-navigation";
 import { colors, spacing, borderRadius, size } from "../ui/theme";
 import { workingShiftsForWeek } from "../../mockdata/workingShifts";
 import { IWorkingShift } from "typings/workingShift";
+import { IScheduleDateValues } from "typings/scheduleDateValues";
 
 type IScheduleScreenProps = NavigationScreenProps;
 
