@@ -2,22 +2,20 @@ import React from "react";
 import Moment from "moment";
 
 import { Component } from "react";
-import {
-  StyleSheet,
-  SafeAreaView,
-  FlatList,
-  View,
-  TouchableOpacity
-} from "react-native";
-import { Text, Icon, ListItem, Badge } from "react-native-elements";
+import { StyleSheet, FlatList, View, TouchableOpacity } from "react-native";
+import { Text, Icon, ListItem, Badge, Header, Card } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
-
-import { colors, spacing, borderRadius, size } from "../ui/theme";
-import { workingShiftsForWeek } from "../../mockdata/workingShifts";
 import { IWorkingShift } from "typings/workingShift";
 import { IScheduleDateValues } from "typings/scheduleDateValues";
+import { IStation } from "typings/station";
+import { colors, spacing } from "../ui/theme";
+import { workingShiftsMockData } from "../../mockdata/workingShiftsMockData";
+
+import "moment/locale/sv";
 
 type IScheduleScreenProps = NavigationScreenProps;
+
+Moment.locale("sv");
 
 export class ScheduleScreen extends Component<IScheduleScreenProps> {
   constructor(props: IScheduleScreenProps) {
@@ -31,66 +29,95 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
     };
   };
 
-  occupiedSettingsIcon = (setting: string) => {
-    let color;
+  renderOccupiedSettingsIcon = (setting: string) => {
+    let color: string;
+    let name: string;
     switch (setting) {
       case "free":
         color = colors.green;
+        name = "calendar-check-o";
         break;
       case "occupied":
         color = colors.red;
+        name = "calendar-times-o";
         break;
       default:
         color = colors.ceruleanBlue;
+        name = "calendar-check-o";
         break;
     }
 
+    return <Icon type={"font-awesome"} name={name} color={color} size={18} />;
+  };
+
+  renderCommentIcon = () => {
     return (
-      <Icon type={"font-awesome"} name={"calendar"} color={color} size={18} />
+      <Icon
+        type={"font-awesome"}
+        name={"comment"}
+        color={colors.ceruleanBlue}
+        size={18}
+      />
     );
   };
 
-  leftElement = (shift: IWorkingShift) => {
+  renderdate = (shift: IWorkingShift) => {
+    const shiftMoment = Moment(shift.date);
+    const isFakeToday = shiftMoment.isBetween("2019-08-15", "2019-08-17");
+    const dateStatusStyle = isFakeToday ? { color: colors.ceruleanBlue } : {};
     return (
       <View style={styles.dateWrapper}>
-        <Text>{Moment(shift.date).format("ddd")}</Text>
-        <Text h1>{Moment(shift.date).format("DD")}</Text>
+        <Text style={dateStatusStyle}>{shiftMoment.format("ddd")}</Text>
+        <Text h1 style={dateStatusStyle}>
+          {shiftMoment.format("DD")}
+        </Text>
       </View>
     );
   };
 
-  stationBadge = (station: string) => {
-    return <Badge value={station} />;
+  stationBadge = (station: IStation) => {
+    return (
+      <Badge
+        badgeStyle={{ backgroundColor: station.color }}
+        value={station.name}
+      />
+    );
   };
 
   renderShifts = ({ item }) => {
     return (
       <View style={styles.listItem}>
-        {this.leftElement(item)}
+        {this.renderdate(item)}
 
         <View style={styles.shiftsWrapper}>
           {item.shifts.length < 1 && (
-            <ListItem
-              key={item.id}
-              title={"Inga pass denna dag"}
-              leftElement={this.occupiedSettingsIcon(item.occupiedStatus)}
-              titleStyle={{ color: colors.grey, fontStyle: "italic" }}
-              containerStyle={styles.shiftContainer}
-            />
+            <Card>
+              <ListItem
+                key={item.id}
+                title={"Inga pass denna dag"}
+                leftElement={this.renderOccupiedSettingsIcon(item.occupiedStatus)}
+                titleStyle={{ color: colors.grey, fontStyle: "italic" }}
+              />
+            </Card>
           )}
           {item.shifts.map((shift: IWorkingShift) => {
             return (
               <TouchableOpacity
+                activeOpacity={0.5}
                 key={shift.id}
                 onPress={this.goToShiftDetailsScreen(shift)}
               >
-                <ListItem
-                  title={shift.time}
-                  leftElement={this.occupiedSettingsIcon(item.occupiedStatus)}
-                  rightElement={this.stationBadge(shift.station)}
-                  containerStyle={styles.shiftContainer}
-                  chevron
-                />
+                <Card>
+                  <ListItem
+                    title={shift.time}
+                    leftElement={this.renderOccupiedSettingsIcon(
+                      item.occupiedStatus
+                    )}
+                    rightIcon={shift.comment && this.renderCommentIcon()}
+                    rightElement={this.stationBadge(shift.station)}
+                    chevron
+                  />
+                </Card>
               </TouchableOpacity>
             );
           })}
@@ -99,19 +126,23 @@ export class ScheduleScreen extends Component<IScheduleScreenProps> {
     );
   };
 
-  keyExtractor = (_item: IWorkingShift, index: number) => index.toString();
+  keyExtractor = (_item: IScheduleDateValues, index: number) =>
+    index.toString();
 
   render() {
     return (
-      <SafeAreaView style={styles.screen}>
+      <View style={styles.screen}>
+        <Header
+          containerStyle={styles.headerShadow}
+        />
         <FlatList
           showsVerticalScrollIndicator={false}
-          style={styles.container}
+          style={styles.listWrapper}
           keyExtractor={this.keyExtractor}
-          data={workingShiftsForWeek}
+          data={workingShiftsMockData}
           renderItem={this.renderShifts}
         />
-      </SafeAreaView>
+      </View>
     );
   }
 }
@@ -121,7 +152,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.wildSand,
     flex: 1
   },
-  container: {
+  listWrapper: {
     paddingHorizontal: spacing.tight
   },
   listItem: {
@@ -139,15 +170,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flexGrow: 1
   },
-  shiftContainer: {
-    borderRadius: borderRadius.rounded,
-    marginVertical: spacing.extraTight,
+  headerShadow: {
     shadowColor: colors.black,
     shadowOffset: {
-      width: 0,
-      height: 2
+      width: 2,
+      height: 6
     },
-    shadowRadius: 2,
-    shadowOpacity: 0.08
+    shadowRadius: 4,
+    shadowOpacity: 0.15
   }
 });
