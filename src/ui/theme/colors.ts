@@ -22,7 +22,9 @@ export const colors = {
     white: "rgb(255, 255, 255)",
     wildSand: "rgb(245, 245, 245)",
 
-    black: "rgb(9, 9, 9)",
+    black: "rgb(31, 31, 31)",
+    lowOpacityBlack: "rgba(0, 0, 0, 0.08)",
+    grey: "rgb(112, 112, 112)",
 
 
     // Activity indicating colors:

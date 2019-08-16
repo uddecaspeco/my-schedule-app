@@ -14,14 +14,14 @@ export const StackNavigator = createStackNavigator(
       screen: OccupiedSettingsScreen,
       navigationOptions: () => ({
         headerBackTitle: null,
-        headerTintColor: colors.seagullBlue
+        headerTintColor: colors.ceruleanBlue
       })
     },
     SHIFT_DETAILS_SCREEN: {
       screen: ShiftDetailsScreen,
       navigationOptions: () => ({
         headerBackTitle: null,
-        headerTintColor: colors.malibuBlue
+        headerTintColor: colors.ceruleanBlue
       })
     }
   },
