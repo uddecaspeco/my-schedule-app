@@ -59,14 +59,28 @@ export const theme = {
       marginVertical: spacing.base
     }
   },
+  Header: {
+    backgroundColor: colors.ceruleanBlue,
+    containerStyle: {
+      height: "13%",
+      zIndex: 1,
+      borderBottomColor: "transparent",
+    },
+  },
   Input: {
     labelStyle: {
       color: colors.grey,
       fontSize: size.large,
       marginTop: spacing.tight,
     },
+    inputStyle: {
+      marginHorizontal: spacing.base
+    },
     inputContainerStyle: {
-      borderColor: colors.lowOpacityBlack
+      marginTop: spacing.tight,
+      backgroundColor: colors.lightGrey,
+      borderRadius: borderRadius.extraRounded * 2,
+      borderColor: "transparent"
     }
   },
   ListItem: {
@@ -75,13 +89,8 @@ export const theme = {
       padding: 0
     }
   },
-  Header: {
-    backgroundColor: colors.ceruleanBlue,
-    containerStyle: {
-      height: "12%",
-      zIndex: 1,
-      borderBottomColor: "transparent",
-    },
+  Overlay: {
+    height: "auto"
   },
   Text: {
     style: {
