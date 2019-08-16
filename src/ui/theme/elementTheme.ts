@@ -54,6 +54,16 @@ export const theme = {
       borderColor: "transparent",
     },
   },
+  CheckBox: {
+    checkedColor: colors.ceruleanBlue,
+    containerStyle: {
+      padding: 0,
+      marginVertical: spacing.base,
+      width: "100%",
+      backgroundColor: "transparent",
+      borderColor: "transparent"
+    }
+  },
   Divider: {
     style: {
       marginVertical: spacing.base
