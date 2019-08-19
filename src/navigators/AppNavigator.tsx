@@ -50,6 +50,13 @@ export const AppNavigator = createBottomTabNavigator(
         backgroundColor: colors.white,
         display: "flex",
         borderTopColor: "transparent",
+        shadowColor: colors.black,
+        shadowOffset: {
+          width: 2,
+          height: 0
+        },
+        shadowRadius: 4,
+        shadowOpacity: 0.2
       }
     }
   }
