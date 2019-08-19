@@ -6,7 +6,6 @@ import {
   LocaleConfig,
   CalendarBaseProps
 } from "react-native-calendars";
-import { colors } from "theme";
 
 LocaleConfig.locales["sv"] = {
   monthNames: [
@@ -47,7 +46,6 @@ LocaleConfig.locales["sv"] = {
     "Söndag"
   ],
   dayNamesShort: ["Mån.", "Tid", "Ons", "Tors", "Fre", "Lör", "Sön"],
-  today: "Idag"
 };
 
 LocaleConfig.defaultLocale = "sv";
@@ -64,7 +62,6 @@ export class Calendar extends Component<CalendarBaseProps, ICalendarState> {
     return (
       <RNCalendar
         {...this.props} 
-        
       />
     );
   }

@@ -12,7 +12,7 @@ import {
   NavigationScreenProp,
   NavigationState
 } from "react-navigation";
-import { colors, spacing, weight } from "../ui/theme";
+import { colors, spacing } from "../ui/theme";
 
 Moment.locale("sv");
 

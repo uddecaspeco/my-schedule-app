@@ -19,7 +19,7 @@ import { IWorkingShift } from "typings/workingShift";
 import { IScheduleDateValues } from "typings/scheduleDateValues";
 import { IStation } from "typings/station";
 import { colors, spacing } from "../ui/theme";
-import { Calendar } from "../ui/framework-components/Calendar";
+import { Calendar } from "../ui/custom-components/Calendar";
 import { workingShiftsMockData } from "../../mockdata/workingShiftsMockData";
 
 import "moment/locale/sv";
@@ -201,7 +201,7 @@ export class ScheduleScreen extends Component<
                       item.occupiedStatus
                     )}
                     rightIcon={
-                      shift.comment && this.renderCommentIcon(shift.comment)
+                      shift.comment && this.renderCommentIcon()
                     }
                     rightElement={this.renderStationBadge(shift.station)}
                     chevron
@@ -226,6 +226,7 @@ export class ScheduleScreen extends Component<
           centerComponent={this.renderWeekToggler()}
           leftComponent={this.renderToggleCalendarComponent()}
         />
+
         <Modal
           isVisible={this.state.modalIsVisible}
           onBackdropPress={this.toggleModal}

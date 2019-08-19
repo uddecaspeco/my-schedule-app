@@ -1,11 +1,11 @@
 import React from "react";
 import { Component } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
-import { Text, Input, CheckBox, Card } from "react-native-elements";
+import { Text, CheckBox, Card } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { colors, spacing } from "../ui/theme";
 
-import { Calendar } from "../ui/framework-components/Calendar";
+import { Calendar } from "../ui/custom-components/Calendar";
 
 type IOccupiedSettingsScreenProps = NavigationScreenProps;
 
