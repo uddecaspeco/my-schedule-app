@@ -1,8 +1,8 @@
-import React from "react";
-import Moment from "moment";
+import React from 'react';
+import Moment from 'moment';
 
-import { Component } from "react";
-import { StyleSheet, FlatList, View, TouchableOpacity } from "react-native";
+import { Component } from 'react';
+import { StyleSheet, FlatList, View, TouchableOpacity } from 'react-native';
 import {
   Text,
   Icon,
@@ -12,17 +12,19 @@ import {
   Card,
   Overlay as Modal,
   Tooltip
-} from "react-native-elements";
-import { NavigationScreenProps } from "react-navigation";
+} from 'react-native-elements';
+import { NavigationScreenProps } from 'react-navigation';
 
-import { IWorkingShift } from "typings/workingShift";
-import { IScheduleDateValues } from "typings/scheduleDateValues";
-import { IStation } from "typings/station";
-import { colors, spacing } from "../ui/theme";
-import { Calendar } from "../ui/custom-components/Calendar";
-import { workingShiftsMockData } from "../../mockdata/workingShiftsMockData";
+import { IWorkingShift } from 'typings/workingShift';
+import { IScheduleDateValues } from 'typings/scheduleDateValues';
+import { IStation } from 'typings/station';
+import { colors, spacing } from '../ui/theme';
+import { Calendar } from '../ui/custom-components/Calendar';
+import { workingShiftsMockData } from '../../mockdata/workingShiftsMockData';
 
-import "moment/locale/sv";
+import { mockDates } from '../mockdata/dates';
+
+import 'moment/locale/sv';
 
 type IScheduleScreenProps = NavigationScreenProps;
 
@@ -30,7 +32,7 @@ interface IScheduleScreenState {
   modalIsVisible: boolean;
 }
 
-Moment.locale("sv");
+Moment.locale('sv');
 
 export class ScheduleScreen extends Component<
   IScheduleScreenProps,
@@ -45,7 +47,7 @@ export class ScheduleScreen extends Component<
 
   goToShiftDetailsScreen = (shift: IWorkingShift) => {
     return () => {
-      this.props.navigation.navigate("SHIFT_DETAILS_SCREEN", { shift });
+      this.props.navigation.navigate('SHIFT_DETAILS_SCREEN', { shift });
     };
   };
 
@@ -61,8 +63,8 @@ export class ScheduleScreen extends Component<
         activeOpacity={0.5}
       >
         <Icon
-          type={"font-awesome"}
-          name={"calendar"}
+          type={'font-awesome'}
+          name={'calendar'}
           color={colors.white}
           raised={!this.state.modalIsVisible}
           reverse
@@ -78,20 +80,20 @@ export class ScheduleScreen extends Component<
     let name: string;
     let svSettingName: string;
     switch (setting) {
-      case "free":
+      case 'free':
         color = colors.green;
-        name = "calendar-check-o";
+        name = 'calendar-check-o';
         svSettingName = 'Du är markerad som "tillgänglig".';
         break;
-      case "occupied":
+      case 'occupied':
         color = colors.red;
-        name = "calendar-times-o";
+        name = 'calendar-times-o';
         svSettingName = 'Du är markerad som "otillgänglig".';
         break;
       default:
         color = colors.ceruleanBlue;
-        name = "calendar-check-o";
-        svSettingName = "Ingen inställning för datumet.";
+        name = 'calendar-check-o';
+        svSettingName = 'Ingen inställning för datumet.';
         break;
     }
 
@@ -101,7 +103,7 @@ export class ScheduleScreen extends Component<
         height={60}
         popover={<Text>{svSettingName}</Text>}
       >
-        <Icon type={"font-awesome"} name={name} color={color} size={20} />
+        <Icon type={'font-awesome'} name={name} color={color} size={20} />
       </Tooltip>
     );
   };
@@ -109,10 +111,10 @@ export class ScheduleScreen extends Component<
   renderCommentIcon = () => {
     return (
       <Icon
-        type={"font-awesome"}
-        name={"comment"}
+        type={'font-awesome'}
+        name={'comment'}
         color={colors.mediumGrey}
-        iconStyle={{ marginTop: - spacing.extraTight}}
+        iconStyle={{ marginTop: -spacing.extraTight }}
         size={22}
       />
     );
@@ -120,13 +122,13 @@ export class ScheduleScreen extends Component<
 
   renderdate = (shift: IWorkingShift) => {
     const shiftMoment = Moment(shift.date);
-    const isFakeToday = shiftMoment.isBetween("2019-08-15", "2019-08-17");
+    const isFakeToday = shiftMoment.isBetween('2019-08-15', '2019-08-17');
     const dateStatusStyle = isFakeToday ? { color: colors.ceruleanBlue } : {};
     return (
       <View style={styles.dateWrapper}>
-        <Text style={dateStatusStyle}>{shiftMoment.format("ddd")}</Text>
+        <Text style={dateStatusStyle}>{shiftMoment.format('ddd')}</Text>
         <Text h1 style={dateStatusStyle}>
-          {shiftMoment.format("DD")}
+          {shiftMoment.format('DD')}
         </Text>
       </View>
     );
@@ -137,9 +139,12 @@ export class ScheduleScreen extends Component<
       <View style={styles.row}>
         <TouchableOpacity activeOpacity={0.5}>
           <Icon
-            iconStyle={{ marginTop: spacing.extraTight, marginRight: spacing.loose }}
-            type={"font-awesome"}
-            name={"chevron-left"}
+            iconStyle={{
+              marginTop: spacing.extraTight,
+              marginRight: spacing.loose
+            }}
+            type={'font-awesome'}
+            name={'chevron-left'}
             color={colors.white}
             size={24}
           />
@@ -149,11 +154,14 @@ export class ScheduleScreen extends Component<
         </Text>
         <TouchableOpacity activeOpacity={0.5}>
           <Icon
-            type={"font-awesome"}
-            name={"chevron-right"}
+            type={'font-awesome'}
+            name={'chevron-right'}
             color={colors.white}
             size={24}
-            iconStyle={{ marginTop: spacing.extraTight, marginLeft: spacing.loose }}
+            iconStyle={{
+              marginTop: spacing.extraTight,
+              marginLeft: spacing.loose
+            }}
           />
         </TouchableOpacity>
       </View>
@@ -179,11 +187,11 @@ export class ScheduleScreen extends Component<
             <Card>
               <ListItem
                 key={item.id}
-                title={"Inga pass denna dag"}
+                title={'Inga pass denna dag'}
                 leftElement={this.renderOccupiedSettingsIcon(
                   item.occupiedStatus
                 )}
-                titleStyle={{ color: colors.grey, fontStyle: "italic" }}
+                titleStyle={{ color: colors.grey, fontStyle: 'italic' }}
               />
             </Card>
           )}
@@ -200,9 +208,7 @@ export class ScheduleScreen extends Component<
                     leftElement={this.renderOccupiedSettingsIcon(
                       item.occupiedStatus
                     )}
-                    rightIcon={
-                      shift.comment && this.renderCommentIcon()
-                    }
+                    rightIcon={shift.comment && this.renderCommentIcon()}
                     rightElement={this.renderStationBadge(shift.station)}
                     chevron
                   />
@@ -231,18 +237,7 @@ export class ScheduleScreen extends Component<
           isVisible={this.state.modalIsVisible}
           onBackdropPress={this.toggleModal}
         >
-          <Calendar
-            current={new Date("2019-08-16")}
-            markedDates={{
-              "2019-08-11": { selected: true, marked: true, startingDay: true },
-              "2019-08-12": { selected: true, marked: true },
-              "2019-08-13": { selected: true },
-              "2019-08-14": { selected: true, marked: true },
-              "2019-08-15": { selected: true, marked: true },
-              "2019-08-16": { selected: true, marked: true },
-              "2019-08-17": { selected: true, endingDay: true }
-            }}
-          />
+          <Calendar markedDates={mockDates} />
         </Modal>
 
         <FlatList
@@ -266,15 +261,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.tight
   },
   listItem: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginVertical: spacing.tight
   },
   dateWrapper: {
-    width: "15%",
-    alignItems: "center"
+    width: '15%',
+    alignItems: 'center'
   },
   headerShadow: {
     shadowColor: colors.black,
@@ -286,10 +281,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15
   },
   shiftsWrapper: {
-    flexDirection: "column",
+    flexDirection: 'column',
     flexGrow: 1
   },
   row: {
-    flexDirection: "row",
+    flexDirection: 'row'
   }
 });

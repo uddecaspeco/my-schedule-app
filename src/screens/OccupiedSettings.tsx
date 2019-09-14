@@ -1,11 +1,13 @@
-import React from "react";
-import { Component } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
-import { Text, CheckBox, Card } from "react-native-elements";
-import { NavigationScreenProps } from "react-navigation";
-import { colors, spacing } from "../ui/theme";
+import React from 'react';
+import { Component } from 'react';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { Text, CheckBox, Card } from 'react-native-elements';
+import { NavigationScreenProps } from 'react-navigation';
+import { colors, spacing } from '../ui/theme';
 
-import { Calendar } from "../ui/custom-components/Calendar";
+import { Calendar } from '../ui/custom-components/Calendar';
+
+import { mockDates } from '../mockdata/dates';
 
 type IOccupiedSettingsScreenProps = NavigationScreenProps;
 
@@ -17,40 +19,24 @@ export class OccupiedSettingsScreen extends Component<
     this.state = {};
   }
 
+  todayDateString = () => {
+    const date = new Date();
+    const options = {
+      weekday: 'short',
+      month: 'long',
+      day: 'numeric'
+    };
+    return new Intl.DateTimeFormat('sv-SE', options).format(date);
+  };
+
   render() {
     return (
       <ScrollView style={styles.screen}>
-        <Calendar
-          markedDates={{
-            "2019-08-06": {
-              color: "#fcce4e",
-              startingDay: true,
-              endingDay: true
-            },
-            "2019-08-09": {
-              color: "#fcce4e",
-              startingDay: true,
-              endingDay: true
-            },
-            "2019-08-13": {
-              color: "#ff7a7a",
-              startingDay: true,
-              endingDay: true
-            },
-            "2019-08-14": {
-              color: "#a7e0a3",
-              startingDay: true,
-              endingDay: true
-            },
-            "2019-08-22": { startingDay: true, color: "#a7e0a3" },
-            "2019-08-23": { color: "#a7e0a3" },
-            "2019-08-24": { color: "#a7e0a3" },
-            "2019-08-25": { endingDay: true, color: "#a7e0a3" }
-          }}
-          markingType={"period"}
-        />
+        <Calendar markedDates={mockDates} markingType={'period'} />
         <View style={styles.container}>
-          <Text h1 style={{marginBottom: spacing.base}}>16 augusti 2019</Text>
+          <Text h1 style={{ marginBottom: spacing.base }}>
+            {this.todayDateString()}
+          </Text>
           <Card>
             <CheckBox
               title="Tillgänglighet ej satt"
