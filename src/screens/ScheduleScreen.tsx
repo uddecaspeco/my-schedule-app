@@ -20,7 +20,7 @@ import { IScheduleDateValues } from 'typings/scheduleDateValues';
 import { IStation } from 'typings/station';
 import { colors, spacing } from '../ui/theme';
 import { Calendar } from '../ui/custom-components/Calendar';
-import { workingShiftsMockData } from '../../mockdata/workingShiftsMockData';
+import { scheduleShifts } from '../mockdata/scheduleShifts';
 
 import { mockDates } from '../mockdata/dates';
 
@@ -244,7 +244,7 @@ export class ScheduleScreen extends Component<
           showsVerticalScrollIndicator={false}
           style={styles.listWrapper}
           keyExtractor={this.keyExtractor}
-          data={workingShiftsMockData}
+          data={scheduleShifts}
           renderItem={this.renderShifts}
         />
       </View>

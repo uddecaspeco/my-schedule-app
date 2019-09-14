@@ -9,8 +9,8 @@ const baseShift: IWorkingShift = {
     time: "10:00 - 19:00",
 }
 
-export const workingShiftsMockData: IScheduleDateValues[] = [
-    {   
+export const scheduleShifts: IScheduleDateValues[] = [
+    {
         id: 0,
         date: "2019-08-12",
         shifts: [
@@ -21,13 +21,13 @@ export const workingShiftsMockData: IScheduleDateValues[] = [
             },
         ]
     },
-    {   
+    {
         id: 1,
         date: "2019-08-13",
         occupiedStatus: "occupied",
         shifts: []
     },
-    {   
+    {
         id: 2,
         date: "2019-08-14",
         occupiedStatus: "free",
@@ -48,7 +48,7 @@ export const workingShiftsMockData: IScheduleDateValues[] = [
             },
         ]
     },
-    {   
+    {
         id: 3,
         date: "2019-08-15",
         shifts: [
@@ -59,7 +59,7 @@ export const workingShiftsMockData: IScheduleDateValues[] = [
             },
         ]
     },
-    {   
+    {
         id: 4,
         date: "2019-08-16",
         shifts: [
@@ -73,7 +73,7 @@ export const workingShiftsMockData: IScheduleDateValues[] = [
             },
         ]
     },
-    {   
+    {
         id: 5,
         date: "2019-08-17",
         shifts: [
@@ -83,7 +83,7 @@ export const workingShiftsMockData: IScheduleDateValues[] = [
             },
         ]
     },
-    {   
+    {
         id: 6,
         date: "2019-08-18",
         shifts: []

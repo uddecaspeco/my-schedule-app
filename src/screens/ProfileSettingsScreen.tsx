@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { StyleSheet, View } from "react-native";
-import { Text, Avatar, Card, Input } from "react-native-elements";
+import { Avatar, Card, Input } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { colors, spacing } from "../ui/theme";
 
