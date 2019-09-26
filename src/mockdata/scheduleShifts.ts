@@ -12,7 +12,7 @@ const baseShift: IWorkingShift = {
 export const scheduleShifts: IScheduleDateValues[] = [
     {
         id: 0,
-        date: "2019-08-12",
+        date: "2019-09-23",
         shifts: [
             {
                 ...baseShift,
@@ -23,13 +23,13 @@ export const scheduleShifts: IScheduleDateValues[] = [
     },
     {
         id: 1,
-        date: "2019-08-13",
+        date: "2019-09-24",
         occupiedStatus: "occupied",
         shifts: []
     },
     {
         id: 2,
-        date: "2019-08-14",
+        date: "2019-09-25",
         occupiedStatus: "free",
         shifts: [
             {
@@ -50,7 +50,7 @@ export const scheduleShifts: IScheduleDateValues[] = [
     },
     {
         id: 3,
-        date: "2019-08-15",
+        date: "2019-09-26",
         shifts: [
             {
                 ...baseShift,
@@ -61,7 +61,7 @@ export const scheduleShifts: IScheduleDateValues[] = [
     },
     {
         id: 4,
-        date: "2019-08-16",
+        date: "2019-09-27",
         shifts: [
             {
                 ...baseShift,
@@ -75,7 +75,7 @@ export const scheduleShifts: IScheduleDateValues[] = [
     },
     {
         id: 5,
-        date: "2019-08-17",
+        date: "2019-09-28",
         shifts: [
             {
                 ...baseShift,
@@ -85,7 +85,7 @@ export const scheduleShifts: IScheduleDateValues[] = [
     },
     {
         id: 6,
-        date: "2019-08-18",
+        date: "2019-09-29",
         shifts: []
     }
 ]

@@ -122,7 +122,7 @@ export class ScheduleScreen extends Component<
 
   renderdate = (shift: IWorkingShift) => {
     const shiftMoment = Moment(shift.date);
-    const isFakeToday = shiftMoment.isBetween('2019-08-15', '2019-08-17');
+    const isFakeToday = shiftMoment.isBetween('2019-09-25', '2019-09-27');
     const dateStatusStyle = isFakeToday ? { color: colors.ceruleanBlue } : {};
     return (
       <View style={styles.dateWrapper}>
