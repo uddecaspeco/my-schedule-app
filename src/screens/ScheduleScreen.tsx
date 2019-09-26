@@ -77,21 +77,25 @@ export class ScheduleScreen extends Component<
 
   renderOccupiedSettingsIcon = (setting: string) => {
     let color: string;
+    let backgroundColor: string;
     let name: string;
     let svSettingName: string;
     switch (setting) {
       case 'free':
         color = colors.green;
+        backgroundColor = colors.greenLight;
         name = 'calendar-check-o';
         svSettingName = 'Du är markerad som "tillgänglig".';
         break;
       case 'occupied':
         color = colors.red;
+        backgroundColor = colors.redLight;
         name = 'calendar-times-o';
         svSettingName = 'Du är markerad som "otillgänglig".';
         break;
       default:
         color = colors.ceruleanBlue;
+        backgroundColor = colors.seagullBlue;
         name = 'calendar-check-o';
         svSettingName = 'Ingen inställning för datumet.';
         break;
@@ -99,7 +103,7 @@ export class ScheduleScreen extends Component<
 
     return (
       <Tooltip
-        backgroundColor={colors.seagullBlue}
+        backgroundColor={backgroundColor}
         height={60}
         popover={<Text>{svSettingName}</Text>}
       >

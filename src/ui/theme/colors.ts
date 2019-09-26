@@ -3,6 +3,7 @@ export const colors = {
     pictonBlueDark: "rgb(0, 128, 168)",
 
     green: "rgb(134, 200, 69)",
+    greenLight: "rgb(163, 228, 98)",
     greenDark: "rgb(64, 130, 0)",
 
     yellow: "rgb(243, 156, 18)",
